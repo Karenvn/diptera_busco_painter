@@ -361,14 +361,16 @@ def plot_alg_chromosomes(
     n_chroms = len(chrom_order)
     print(
         f"[INFO] Plotting {len(locations)} BUSCOs across "
-        f"{n_chroms} chromosomes/scaffolds after filtering..."
+        f"{n_chroms} chromosomes/scaffolds..."
     )
 
     panel_size = max(1, int(panel_size))
     max_columns = max(1, int(max_columns))
     ncols = min(max_columns, max(1, math.ceil(n_chroms / panel_size)))
     panel_chroms_list = split_balanced(chrom_order, ncols)
-    chroms_per_panel = max((len(panel_chroms) for panel_chroms in panel_chroms_list), default=0)
+    chroms_per_panel = max(
+        (len(panel_chroms) for panel_chroms in panel_chroms_list), default=0
+    )
     print(
         f"[INFO] Layout: {ncols} column(s), up to "
         f"{chroms_per_panel} chromosomes/scaffolds per column"

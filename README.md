@@ -66,7 +66,7 @@ one of:
 If auto cannot resolve Brachycera membership, it falls back to the broader
 Diptera table and prints a warning.
 
-## Local Examples
+## Local examples
 
 Use this pattern once the BUSCO table has been rerun with `diptera_odb12`.
 `--accession` lets `dbp run` choose the correct ALG table and write public
@@ -149,7 +149,7 @@ If no lengths file is supplied, lengths are estimated from BUSCO positions.
 When a lengths file is supplied, all chromosomes/scaffolds in that file are
 plotted, including BUSCO-less or ALG-less ones.
 
-## Shorter ALG Labels
+## Shorter ALG labels
 
 By default, chromosome labels list every ALG with at least `--label-threshold`
 BUSCOs on that chromosome. To show only the dominant ALG in genomic windows, use
