@@ -199,6 +199,20 @@ def format_alg_label(algs: list[str], wrap: int = DEFAULT_LABEL_WRAP) -> str:
     return "\n".join(wrapped_lines)
 
 
+def split_balanced(values: list[str], n_groups: int) -> list[list[str]]:
+    """Split values into ordered groups whose sizes differ by at most one."""
+    n_groups = max(1, n_groups)
+    base_size, extra = divmod(len(values), n_groups)
+    groups: list[list[str]] = []
+    start = 0
+    for group_index in range(n_groups):
+        group_size = base_size + (1 if group_index < extra else 0)
+        end = start + group_size
+        groups.append(values[start:end])
+        start = end
+    return groups
+
+
 def calculate_alg_labels(
     locations: pd.DataFrame, threshold: int = 5, wrap: int = DEFAULT_LABEL_WRAP
 ) -> dict[str, str]:
@@ -353,7 +367,8 @@ def plot_alg_chromosomes(
     panel_size = max(1, int(panel_size))
     max_columns = max(1, int(max_columns))
     ncols = min(max_columns, max(1, math.ceil(n_chroms / panel_size)))
-    chroms_per_panel = max(1, math.ceil(n_chroms / ncols))
+    panel_chroms_list = split_balanced(chrom_order, ncols)
+    chroms_per_panel = max((len(panel_chroms) for panel_chroms in panel_chroms_list), default=0)
     print(
         f"[INFO] Layout: {ncols} column(s), up to "
         f"{chroms_per_panel} chromosomes/scaffolds per column"
@@ -365,13 +380,8 @@ def plot_alg_chromosomes(
         MIN_PLOT_HEIGHT_CM, ROW_HEIGHT_CM * min(chroms_per_panel, max(1, n_chroms))
     )
 
-    panel_chroms_list: list[list[str]] = []
     panel_limits: list[float] = []
-    for col_idx in range(ncols):
-        start_idx = col_idx * chroms_per_panel
-        end_idx = min((col_idx + 1) * chroms_per_panel, n_chroms)
-        panel_chroms = chrom_order[start_idx:end_idx]
-        panel_chroms_list.append(panel_chroms)
+    for panel_chroms in panel_chroms_list:
         if panel_chroms:
             panel_max_length = chrom_lengths[
                 chrom_lengths["query_chr"].isin(panel_chroms)

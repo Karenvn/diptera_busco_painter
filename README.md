@@ -99,6 +99,16 @@ dbp run \
   --label-window-mb 10
 ```
 
+### Example plots
+
+`idWinCrue1`, using the Brachycera ALG table:
+
+![idWinCrue1 Brachycera ALG chromosome plot](examples/idWinCrue1/idWinCrue1.png)
+
+`idTipFasc1`, using the broader Diptera ALG table:
+
+![idTipFasc1 Diptera ALG chromosome plot](examples/idTipFasc1/idTipFasc1.png)
+
 In this mode, `dbp run` writes GenBank accessions in `chrom_lengths.tsv`.
 If the BUSCO table uses assembly sequence names such as `SUPER_1`, those names
 are remapped to their matching GenBank accessions in `all_location.tsv` before
