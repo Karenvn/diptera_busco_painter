@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diptera-busco-painter"
+version = "0.1.0"
+description = "Map BUSCO diptera_odb12 full_table.tsv files to Diptera ALGs and plot draft or final assemblies."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Karen van Niekerk" }
+]
+dependencies = [
+    "matplotlib",
+    "pandas",
+    "requests",
+]
+
+[project.scripts]
+diptera-busco-painter = "diptera_busco_painter.cli:main"
+dbp = "diptera_busco_painter.cli:main"
+buscopainter = "diptera_busco_painter.cli:paint_main"
+plot-buscopainter = "diptera_busco_painter.cli:plot_main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+diptera_busco_painter = ["data/*.tsv"]
