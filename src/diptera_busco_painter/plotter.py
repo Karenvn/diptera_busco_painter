@@ -10,13 +10,13 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib import font_manager
 
-BAR_HEIGHT = 0.62
+BAR_HEIGHT = 0.45
 LABEL_OFFSET_FACTOR = 0.02
 LABEL_PADDING_FACTOR = 0.06
 DEFAULT_PANEL_SIZE = 20
 PLOT_BODY_WIDTH_CM = 22
-ROW_HEIGHT_CM = 1.10
-MIN_PLOT_HEIGHT_CM = 18
+ROW_HEIGHT_CM = 0.85
+MIN_PLOT_HEIGHT_CM = 12
 MAX_PANEL_COLUMNS = 3
 COMPACT_LABEL_THRESHOLD = 80
 ASSEMBLY_MODES = ("auto", "final", "draft")
